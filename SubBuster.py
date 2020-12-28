@@ -27,7 +27,7 @@ def StartUp():
     i = 0 
 
     print(Banner)
-    if len(sys.argv == 0):
+    if len(sys.argv) == 0:
         print("For help type - SubBuster.py help")
     for argv in sys.argv:
         if argv == "-d":
