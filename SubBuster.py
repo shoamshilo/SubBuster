@@ -29,6 +29,7 @@ def StartUp():
     print(Banner)
     if len(sys.argv) == 0:
         print("For help type - SubBuster.py help")
+        sys.exit()
     for argv in sys.argv:
         if argv == "-d":
             domain = sys.argv[i + 1]
