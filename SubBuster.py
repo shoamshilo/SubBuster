@@ -6,8 +6,7 @@ from os import path
 
 Banner = """Usage: 
 -d - spesify the base domain
--w - Path to the wordlist. if the flag is not set 
-     SubBuster will use its own wordlist.
+-w - Path to the wordlist. 
 -o - Spesify a output file.
 help - Help menu
 
@@ -42,13 +41,11 @@ def StartUp():
             print(Banner)
             sys.exit()
         i+=1
-    if wordlist == "":
-        wordlist = 'wordlist.txt'
 
 
 def BrutForce():
     global Domains
-    if path.exists(wordlist):
+    if ErrorCheck():
         with open(wordlist) as File:
             line = File.readline()
             while line:
@@ -59,10 +56,7 @@ def BrutForce():
                         Domains.insert(len(Domains) , url)
                 except requests.exceptions.ConnectionError:   
                     pass
-                line = File.readline()
-    else:
-        print(mark + "File not found error:")
-        print(mark + wordlist + "dosent exists")     
+                line = File.readline()  
     if outFile:
         OutPut()
     
@@ -77,9 +71,19 @@ def OutPut():
     with open(outFile , 'w') as out:
         for url in Domains:
             out.writelines(url + '\n')
-    
 
-
+def ErrorCheck():
+    if not wordlist:
+        print(mark + "You havent specified a wordlist.")
+        sys.exit()
+    if not path.exists(wordlist):
+        print(mark + """There is an error with your wordlist. 
+    it is either not found or it dosent exists.""")
+        sys.exit()
+    if not domain:
+        print(mark + "You havent specified a domain.")
+        sys.exit()
+    return True
    
 if __name__ == '__main__':
     StartUp()
