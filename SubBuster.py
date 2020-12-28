@@ -4,16 +4,18 @@ from os import path
 
 
 
-Banner = """
-Usage: 
+Banner = """Usage: 
 -d - spesify the base domain
 -w - Path to the wordlist. if the flag is not set 
      SubBuster will use its own wordlist.
+-o - Spesify a output file.
 help - Help menu
-"""
+
+Created By: @shoamshilo 2020"""
+
     
 
-File = "" 
+outFile = "" 
 domain = ""
 wordlist = ""
 Domains = []
@@ -22,10 +24,9 @@ mark = '[+] '
 
 def StartUp():        
     global domain
+    global outFile
     global wordlist
     i = 0 
-
-    print(mark + 'Created By: @shoamshilo 2020 \n')
 
     if len(sys.argv) == 1:
         print(mark + "For help type - SubBuster.py help")
@@ -35,6 +36,8 @@ def StartUp():
             domain = sys.argv[i + 1]
         if argv == "-w":
             wordlist = sys.argv[i + 1]
+        if argv == "-o":
+            outFile = sys.argv[i + 1]
         if argv == "help":
             print(Banner)
             sys.exit()
@@ -60,17 +63,28 @@ def BrutForce():
     else:
         print(mark + "File not found error:")
         print(mark + wordlist + "dosent exists")     
+    if outFile:
+        OutPut()
+    
+
 
 def printDomains():
-    print(mark +  "The domain " + domain + " has " + str(len(Domains)) + " sub-domains")
+    print(mark +  "Found " + str(len(Domains)) + " Sub-Domains")
     for url in Domains:
         print(mark + url)
+
+def OutPut():
+    with open(outFile , 'w') as out:
+        for url in Domains:
+            out.writelines(url + '\n')
+    
+
 
    
 if __name__ == '__main__':
     StartUp()
     BrutForce()
     printDomains()
-
+    
 
 
