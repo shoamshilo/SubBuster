@@ -27,12 +27,16 @@ def StartUp():
     i = 0 
 
     print(Banner)
-
+    if len(sys.argv == 0):
+        print("For help type - SubBuster.py help")
     for argv in sys.argv:
         if argv == "-d":
             domain = sys.argv[i + 1]
         if argv == "-w":
             wordlist = sys.argv[i + 1]
+        if argv == "help":
+            print(Banner)
+            sys.exit()
         i+=1
 
 
@@ -53,7 +57,7 @@ def BrutForce():
                 line = File.readline()
     else:
         print(mark + "File not found error:")
-        print(mark + wordlist + " dosent exists")     
+        print(mark + wordlist + "dosent exists")     
 
 def printDomains():
     print(mark +  "The domain " + domain + " has " + str(len(Domains)) + " sub-domains")
