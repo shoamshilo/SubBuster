@@ -4,6 +4,7 @@ from os import path
 
 
 
+
 Banner = """Usage: 
 -d - spesify the base domain.
 -w - Path to the wordlist. 
@@ -62,7 +63,6 @@ def BrutForce():
     if outFile:
         OutPut()
     
-
 
 def printDomains():
     print(mark +  "Found " + str(len(Domains)) + " Sub-Domains")
