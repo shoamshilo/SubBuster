@@ -56,7 +56,7 @@ def BrutForce():
                     url = "http://" + line.strip() + "." +  domain
                     r = requests.get(url)
                     if r.status_code:
-                        Domains.insert(len(Domains) , r.url)
+                        Domains.insert(len(Domains) ,url)
                 except requests.exceptions.ConnectionError:   
                     pass
                 line = File.readline()  
