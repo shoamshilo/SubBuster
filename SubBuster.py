@@ -5,7 +5,7 @@ from os import path
 
 
 Banner = """Usage: 
--d - spesify the base domain
+-d - spesify the base domain.
 -w - Path to the wordlist. 
 -o - Spesify a output file.
 help - Help menu
