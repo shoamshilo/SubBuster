@@ -1,17 +1,17 @@
 #!/usr/bin/python3
 
-import sys , requests
+import sys , httplib2
 from os import path
 
 Banner = """Usage: 
 -d - spesify the base domain.
--w - Path to the wordlist. 
+-w - Path to the wordlist. If the flag is not 
+     set SubBuster will use its own wordlist.
 -o - Spesify a output file.
 help - Help menu
 
 Created By: @shoamshilo 2020"""
     
-
 outFile = "" 
 domain = ""
 wordlist = ""
@@ -39,29 +39,37 @@ def StartUp():
             sys.exit()
         i+=1
 
-
 def BrutForce():
     global Domains
-
     if ErrorCheck():
         print(mark +"Searching Sub Domains")
         with open(wordlist) as File:
             line = File.readline()
             while line:
-                try:
-                    url = "http://" + line.strip() + "." +  domain
-                    r = requests.get(url)
-                    if r.status_code:
-                        Domains.insert(len(Domains) , url)
-                except requests.exceptions.ConnectionError:   
-                    pass
+                http = "http://" + line.strip() + "." +  domain
+                https = "https://" + line.strip() + "." +  domain
+                if url_check(https):
+                    Domains.insert(len(Domains) , https)
+                else:
+                    if url_check(http):
+                        Domains.insert(len(Domains) , http)
                 line = File.readline()  
     if outFile:
         OutPut()
-     
+
+def url_check(url):
+    h = httplib2.Http()
+    try:
+        resp, content = h.request(url , 'HEAD')
+        if resp.status:
+            return True
+        else:
+            return False
+    except httplib2.ServerNotFoundError:
+        pass
 
 def printDomains():
-    print(mark +  "Found " + str(len(Domains)) + " Sub-Domains")
+    print(mark +  "Found " + str(len(Domains)) + " Sub-Domains:")
     for url in Domains:
         print(mark + url)
 
@@ -71,9 +79,10 @@ def OutPut():
             out.writelines(url + '\n')
 
 def ErrorCheck():
+    global wordlist
     if not wordlist:
-        print(mark + "You havent specified a wordlist.")
-        sys.exit()
+        print(mark + "You havent specified a wordlist. Useing SubBusters wordlist.")
+        wordlist = "wordlist.txt"
     if not path.exists(wordlist):
         print(mark + """There is an error with your wordlist. 
     it is either not found or it dosent exists.""")
