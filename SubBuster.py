@@ -1,5 +1,4 @@
-import sys
-import requests
+import sys , requests
 from os import path
 
 
@@ -62,7 +61,7 @@ def BrutForce():
                 line = File.readline()  
     if outFile:
         OutPut()
-    
+     
 
 def printDomains():
     print(mark +  "Found " + str(len(Domains)) + " Sub-Domains")
@@ -91,6 +90,6 @@ if __name__ == '__main__':
     StartUp()
     BrutForce()
     printDomains()
-    
+
 
 
