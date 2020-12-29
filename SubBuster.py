@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import sys , requests
 from os import path
 
