@@ -1,9 +1,6 @@
 import sys , requests
 from os import path
 
-
-
-
 Banner = """Usage: 
 -d - spesify the base domain.
 -w - Path to the wordlist. 
@@ -11,7 +8,6 @@ Banner = """Usage:
 help - Help menu
 
 Created By: @shoamshilo 2020"""
-
     
 
 outFile = "" 
@@ -19,7 +15,6 @@ domain = ""
 wordlist = ""
 Domains = []
 mark = '[+] '
-
 
 def StartUp():        
     global domain
