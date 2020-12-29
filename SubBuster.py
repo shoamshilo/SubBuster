@@ -45,7 +45,9 @@ def StartUp():
 
 def BrutForce():
     global Domains
+
     if ErrorCheck():
+        print(mark +"Searching Sub Domains")
         with open(wordlist) as File:
             line = File.readline()
             while line:
@@ -53,7 +55,7 @@ def BrutForce():
                     url = "http://" + line.strip() + "." +  domain
                     r = requests.get(url)
                     if r.status_code:
-                        Domains.insert(len(Domains) , url)
+                        Domains.insert(len(Domains) , r.url)
                 except requests.exceptions.ConnectionError:   
                     pass
                 line = File.readline()  
