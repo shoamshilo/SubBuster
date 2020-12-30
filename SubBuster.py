@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import sys , httplib2
+import sys , httplib2 , time 
 from os import path
 
 Banner = """Usage: 
@@ -8,10 +8,12 @@ Banner = """Usage:
 -w - Path to the wordlist. If the flag is not 
      set SubBuster will use its own wordlist.
 -o - Spesify a output file.
+-f - Sepedify a list of domains.
 help - Help menu
 
 Created By: @shoamshilo 2020"""
-    
+
+ListFile = ""
 outFile = "" 
 domain = ""
 wordlist = ""
@@ -22,6 +24,7 @@ def StartUp():
     global domain
     global outFile
     global wordlist
+    global ListFile
     i = 0 
 
     if len(sys.argv) == 1:
@@ -34,6 +37,8 @@ def StartUp():
             wordlist = sys.argv[i + 1]
         if argv == "-o":
             outFile = sys.argv[i + 1]
+        if argv == "-f":
+            ListFile = sys.argv[i + 1]
         if argv == "help":
             print(Banner)
             sys.exit()
@@ -57,6 +62,15 @@ def BrutForce():
     if outFile:
         OutPut()
 
+def listFile():
+    global domain
+    with open(ListFile, 'r') as listfile:
+        domain = listfile.readline()
+        while domain:
+            print(mark + "Busting " + domain + ':')
+            BrutForce()
+            domain = listfile.readline()
+
 def url_check(url):
     h = httplib2.Http()
     try:
@@ -65,8 +79,9 @@ def url_check(url):
             return True
         else:
             return False
-    except httplib2.ServerNotFoundError:
-        pass
+    except Exception:
+        printDomains()
+        return False
 
 def printDomains():
     print(mark +  "Found " + str(len(Domains)) + " Sub-Domains:")
@@ -88,11 +103,17 @@ def ErrorCheck():
     it is either not found or it dosent exists.""")
         sys.exit()
     if not domain:
+        if ListFile:
+            return True
         print(mark + "You havent specified a domain.")
         sys.exit()
     return True
    
 if __name__ == '__main__':
     StartUp()
+    if ListFile:
+        listFile()
+        printDomains()
+        sys.exit()
     BrutForce()
     printDomains()
