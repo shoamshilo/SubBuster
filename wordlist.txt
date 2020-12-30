@@ -1,3 +1,11 @@
+www
 mail
-aaa
-classroom
+remote
+blog
+webmail
+server
+ns1
+classrom
+smtp
+secure
+docs
