@@ -11,7 +11,7 @@ Banner = """Usage:
 help - Help menu.
 
 ---SubBuster v0.1---
-Created By: @shoamshilo 2020"""
+Created By: @shoamshilo 2020."""
 
 ListFile = ""
 outFile = "" 
