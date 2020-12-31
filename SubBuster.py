@@ -91,11 +91,8 @@ def listFile():
 def url_check(url):
     try:
         r = requests.get(url)
-        time = r.elapsed.seconds
-        if time <= 20:
-            if r.status_code:
-                return True
-            return False
+        if r.status_code:
+            return True
         return False
     except Exception:
         return False
