@@ -7,7 +7,8 @@ Banner = """Usage:
 -w - Path to the wordlist. If the flag is not 
      set SubBuster will use its own wordlist.
 -o - Spesify a output file.
--f - Sepedify a list of domains.
+-f - Spesify a list of domains.
+-p - Spesify a port 80 or 443.
 help - Help menu.
 
 ---SubBuster v0.1---
