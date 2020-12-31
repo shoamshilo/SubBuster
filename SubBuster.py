@@ -11,10 +11,11 @@ Banner = """Usage:
 help - Help menu.
 
 ---SubBuster v0.1---
-Created By: @shoamshilo 2020."""
+Created By: @shoamshilo 2020"""
 
 ListFile = ""
 outFile = "" 
+ports = ""
 domain = ""
 wordlist = ""
 Domains = []
@@ -25,6 +26,7 @@ def StartUp():
     global outFile
     global wordlist
     global ListFile
+    global ports
     i = 0 
 
     if len(sys.argv) == 1:
@@ -39,6 +41,8 @@ def StartUp():
             outFile = sys.argv[i + 1]
         if argv == "-f":
             ListFile = sys.argv[i + 1]
+        if argv == '-p':
+            ports = sys.argv[i + 1]
         if argv == "help":
             print(Banner)
             sys.exit()
@@ -53,7 +57,15 @@ def BrutForce():
             while line:
                 http = "http://" + line.strip() + "." +  domain
                 https = "https://" + line.strip() + "." +  domain
-                if url_check(https):
+                if ports:
+                    port = Ports()
+                    if '80' in port:
+                        if url_check(http):
+                            Domains.insert(len(Domains) , http) 
+                    if '443' in port:
+                        if url_check(https):
+                            Domains.insert(len(Domains) , https) 
+                elif url_check(https):
                     Domains.insert(len(Domains) , https)
                 else:
                     if url_check(http):
@@ -64,12 +76,17 @@ def BrutForce():
 
 def listFile():
     global domain
-    with open(ListFile, 'r') as listfile:
-        domain = listfile.readline().strip()
-        while domain:
-            print(mark + "Busting " + domain + ':')
-            BrutForce()
-            domain = listfile.readline()
+    try:
+        with open(ListFile, 'r') as listfile:
+            domain = listfile.readline().strip()
+            while domain:
+                print(mark + "Busting " + domain + ':')
+                BrutForce()
+                domain = listfile.readline()
+    except FileNotFoundError:
+        print(mark +  """There is an error with your domain file. 
+    it is either not found or it dosent exists.""")
+        sys.exit()
 
 def url_check(url):
     try:
@@ -82,6 +99,9 @@ def url_check(url):
         return False
     except Exception:
         return False
+
+def Ports():
+    return ports.split(',')
 
 def printDomains():
     print(mark +  "Found " + str(len(Domains)) + " Sub-Domains:")
@@ -101,7 +121,7 @@ def ErrorCheck():
     if not path.exists(wordlist):
         print(mark + """There is an error with your wordlist. 
     it is either not found or it dosent exists.""")
-        sys.exit()
+        sys.exit()    
     if not domain:
         if ListFile:
             return True
