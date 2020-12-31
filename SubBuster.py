@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-
-import sys , httplib2 , time 
+import sys , requests 
 from os import path
 
 Banner = """Usage: 
@@ -9,8 +8,9 @@ Banner = """Usage:
      set SubBuster will use its own wordlist.
 -o - Spesify a output file.
 -f - Sepedify a list of domains.
-help - Help menu
+help - Help menu.
 
+---SubBuster v0.1---
 Created By: @shoamshilo 2020"""
 
 ListFile = ""
@@ -65,22 +65,23 @@ def BrutForce():
 def listFile():
     global domain
     with open(ListFile, 'r') as listfile:
-        domain = listfile.readline()
+        domain = listfile.readline().strip()
         while domain:
             print(mark + "Busting " + domain + ':')
             BrutForce()
             domain = listfile.readline()
 
 def url_check(url):
-    h = httplib2.Http()
     try:
-        resp, content = h.request(url , 'HEAD')
         if resp.status:
-            return True
-        else:
+        r = requests.get(url)
+        time = r.elapsed.seconds
+        if time <= 20:
+            if r.status_code:
+                return True
             return False
+        return False
     except Exception:
-        printDomains()
         return False
 
 def printDomains():
