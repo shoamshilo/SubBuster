@@ -3,7 +3,7 @@ import sys , requests
 from os import path
 
 Banner = """Usage: 
--d - spesify the base domain.
+-d - Spesify the base domain.
 -w - Path to the wordlist. If the flag is not 
      set SubBuster will use its own wordlist.
 -o - Spesify a output file.
@@ -72,8 +72,6 @@ def BrutForce():
                     if url_check(http):
                         Domains.insert(len(Domains) , http)
                 line = File.readline()  
-    if outFile:
-        OutPut()
 
 def listFile():
     global domain
@@ -132,6 +130,10 @@ if __name__ == '__main__':
     if ListFile:
         listFile()
         printDomains()
+        if outFile:
+            OutPut()
         sys.exit()
     BrutForce()
+    if outFile:
+        OutPut()
     printDomains()
