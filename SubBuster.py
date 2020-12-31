@@ -73,7 +73,6 @@ def listFile():
 
 def url_check(url):
     try:
-        if resp.status:
         r = requests.get(url)
         time = r.elapsed.seconds
         if time <= 20:
