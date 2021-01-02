@@ -56,8 +56,8 @@ def BrutForce():
         with open(wordlist) as File:
             line = File.readline()
             while line:
-                http = "http://" + line.strip() + "." +  domain
-                https = "https://" + line.strip() + "." +  domain
+                http = f"http://{line.strip()}.{domain}"
+                https = f"https://{line.strip()}.{domain}"
                 if ports:
                     port = Ports()
                     if '80' in port:
@@ -79,7 +79,7 @@ def listFile():
         with open(ListFile, 'r') as listfile:
             domain = listfile.readline().strip()
             while domain:
-                print(mark + "Busting " + domain + ':')
+                print(mark + f"Busting {domain}:")
                 BrutForce()
                 domain = listfile.readline()
     except FileNotFoundError:
@@ -100,7 +100,7 @@ def Ports():
     return ports.split(',')
 
 def printDomains():
-    print(mark +  "Found " + str(len(Domains)) + " Sub-Domains:")
+    print(mark +  f"Found {str(len(Domains))} subdomains:")
     for url in Domains:
         print(mark + url)
 
@@ -129,6 +129,8 @@ if __name__ == '__main__':
     StartUp()
     if ListFile:
         listFile()
+        if outFile:
+            OutPut()
         printDomains()
         if outFile:
             OutPut()
