@@ -5,10 +5,10 @@ This tool can assist penetration tester or OSINT investigators in determining a 
 
 ## Table of contents
 * [General info](#general-info)
-* [Setup](#setup)
+* [Installation](#installation)
 * [Features](#features)
 * [Status](#status)
-* [Inspiration](#inspiration)
+* [Credits](#credits)
 * [Contact](#contact)
 
 ## General info
