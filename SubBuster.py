@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-import sys , requests 
+import sys , requests , socket
 from os import path
 
 Banner = """Usage: 
@@ -9,11 +9,13 @@ Banner = """Usage:
 -o - Spesify a output file.
 -f - Spesify a list of domains.
 -p - Spesify a port 80 or 443.
+-I - Toggle hostname IP resolve.
 help - Help menu.
 
 ---SubBuster v0.1---
 Created By: @shoamshilo 2020"""
 
+ip = False
 ListFile = ""
 outFile = "" 
 ports = ""
@@ -23,6 +25,7 @@ Domains = []
 mark = '[+] '
 
 def StartUp():        
+    global ip
     global domain
     global outFile
     global wordlist
@@ -44,6 +47,8 @@ def StartUp():
             ListFile = sys.argv[i + 1]
         if argv == '-p':
             ports = sys.argv[i + 1]
+        if argv == '-I':
+            ip = True
         if argv == "help":
             print(Banner)
             sys.exit()
@@ -99,7 +104,17 @@ def url_check(url):
 def Ports():
     return ports.split(',')
 
+def ip_resolve():
+        i=0
+        for url in Domains:
+           s = url.split('/')
+           url = f"{url} : {socket.gethostbyname(s[2])}"
+           Domains[i] = url
+           i+=1
+
 def printDomains():
+    if ip:
+        ip_resolve()
     print(mark +  f"Found {str(len(Domains))} subdomains:")
     for url in Domains:
         print(mark + url)
