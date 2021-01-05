@@ -3,12 +3,12 @@ import sys , requests , socket
 from os import path
 
 Banner = """Usage: 
--d - Spesify the base domain.
+-d - Specify the base domain.
 -w - Path to the wordlist. If the flag is not 
-     set SubBuster will use its own wordlist.
--o - Spesify a output file.
--f - Spesify a list of domains.
--p - Spesify a port 80 or 443.
+     set SubBuster will use its wordlist.
+-o - Specify an output file.
+-f - Specify a list of domains.
+-p - Specify a port 80 or 443.
 -v - Verbos output.
 -I - Toggle hostname IP resolve.
 help - Help menu.
