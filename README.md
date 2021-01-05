@@ -1,6 +1,6 @@
 # SubBuster
 SubBuster is a sub-domain discovery tool that uses a custom made wordlist to detect sub-domains.
-This tool can assist penetration tester or OSINT investigators in determining a corporation sub-domains.
+This tool can assist penetration testers or OSINT investigators in determining a corporation sub-domains.
  
 
 ## Table of contents
