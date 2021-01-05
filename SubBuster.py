@@ -9,12 +9,14 @@ Banner = """Usage:
 -o - Spesify a output file.
 -f - Spesify a list of domains.
 -p - Spesify a port 80 or 443.
+-v - Verbos output.
 -I - Toggle hostname IP resolve.
 help - Help menu.
 
 ---SubBuster v0.1---
 Created By: @shoamshilo 2020"""
 
+verbos = False
 ip = False
 ListFile = ""
 outFile = "" 
@@ -25,6 +27,7 @@ Domains = []
 mark = '[+] '
 
 def StartUp():        
+    global verbos
     global ip
     global domain
     global outFile
@@ -49,6 +52,8 @@ def StartUp():
             ports = sys.argv[i + 1]
         if argv == '-I':
             ip = True
+        if argv == '-v':
+            verbos = True
         if argv == "help":
             print(Banner)
             sys.exit()
@@ -76,6 +81,8 @@ def BrutForce():
                 else:
                     if url_check(http):
                         Domains.insert(len(Domains) , http)
+                if verbos:
+                    print(mark + Domains[len(Domains)-1])
                 line = File.readline()  
 
 def listFile():
