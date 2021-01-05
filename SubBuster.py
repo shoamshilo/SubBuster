@@ -13,7 +13,7 @@ Banner = """Usage:
 -I - Toggle hostname IP resolve.
 help - Help menu.
 
----SubBuster v0.1---
+---SubBuster v0.2---
 Created By: @shoamshilo 2020"""
 
 verbos = False
@@ -122,10 +122,9 @@ def ip_resolve():
 def printDomains():
     if ip:
         ip_resolve()
-    print(mark +  f"Found {str(len(Domains))} subdomains:")
+    print(mark +  f"Found {str(len(Domains))} sub-domains:")
     for url in Domains:
         print(mark + url)
-
 def OutPut():
     with open(outFile , 'w') as out:
         for url in Domains:
@@ -158,6 +157,6 @@ if __name__ == '__main__':
             OutPut()
         sys.exit()
     BrutForce()
+    printDomains()
     if outFile:
         OutPut()
-    printDomains()
