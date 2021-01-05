@@ -14,30 +14,38 @@ This tool can assist penetration tester or OSINT investigators in determining a 
 ## General info
 
 
-## Setup
-First clone the repository to your local machine.
+## Installation
+First clone the repository to your local machine:
+
 `git clone https://github.com/shoamshilo/SubBuster`
 
 ### Linux
-Install the dependencies.
+Install the dependencies:
+
 `pip install requests`
 
-change the file permissions.
+change the file permissions:
+
 `chmod +x SubBuster.py`
 
 ### Windows
-install the dependencies.
+install the dependencies:
+
 `pip install requests`
 
 
 ## Code Examples
 Usage:
-* Command for the help menu.
-`python SubBuster.py help`
-* Search the domain google.com for sub-domains.
-`python SubBuster.py -d google.com -o out.txt`
+* Command for the help menu:
+
+``python SubBuster.py help``
+
+* Search the domain google.com for sub-domains:
+
+``python SubBuster.py -d google.com -o out.txt``
 
 ## Features
+```
 Usage: 
 -d - Specify the base domain.
 -w - Path to the wordlist. If the flag is not 
@@ -48,11 +56,11 @@ Usage:
 -v - Verbos output. 
 -I - Toggle hostname IP resolve.
 help - Help menu.
-
+```
 ## Status
 The project is in progress. planning on adding more features.
 
-## Inspiration
+## Credits
 [Bitquark](https://github.com/bitquark) - SubBusters wordlist is based on his project.
 
 
