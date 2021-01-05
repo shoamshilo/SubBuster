@@ -72,17 +72,23 @@ def BrutForce():
                     port = Ports()
                     if '80' in port:
                         if url_check(http):
-                            Domains.insert(len(Domains) , http) 
+                            Domains.insert(len(Domains) , http)
+                            if verbos:
+                                print(mark + Domains[len(Domains)-1]) 
                     if '443' in port:
                         if url_check(https):
-                            Domains.insert(len(Domains) , https) 
+                            Domains.insert(len(Domains) , https)
+                            if verbos:
+                                print(mark + Domains[len(Domains)-1]) 
                 elif url_check(https):
                     Domains.insert(len(Domains) , https)
+                    if verbos:
+                        print(mark + Domains[len(Domains)-1])             
                 else:
                     if url_check(http):
                         Domains.insert(len(Domains) , http)
-                if verbos:
-                    print(mark + Domains[len(Domains)-1])
+                        if verbos:
+                            print(mark + Domains[len(Domains)-1])
                 line = File.readline()  
 
 def listFile():
