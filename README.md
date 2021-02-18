@@ -1,18 +1,14 @@
 # SubBuster
 SubBuster is a sub-domain discovery tool that uses a custom made wordlist to detect sub-domains.
-This tool can assist penetration testers or OSINT investigators in determining a corporation sub-domains.
- 
+This tool can assist penetration tester or OSINT investigators in determining a corporation sub-domains. it allows
+for both active and passive scanning of a domain
 
 ## Table of contents
-* [General info](#general-info)
 * [Installation](#installation)
 * [Features](#features)
 * [Status](#status)
 * [Credits](#credits)
 * [Contact](#contact)
-
-## General info
-
 
 ## Installation
 First clone the repository to your local machine:
@@ -53,9 +49,15 @@ Usage:
 -o - Specify an output file.
 -f - Specify a list of domains.
 -p - Specify a port 80 or 443.
+-q - Toggle quiet mode.
 -v - Verbose output. 
 -I - Toggle hostname IP resolve.
+-E - Toggle email searching with hunter.io.
+     Requires an API key.
 help - Help menu.
+
+---SubBuster v0.3---
+Created By: @shoamshilo 2020
 ```
 ## Status
 The project is in progress. planning on adding more features.

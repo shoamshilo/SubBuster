@@ -17,7 +17,7 @@ Banner = """Usage:
      Requires an API key.
 help - Help menu.
 
----SubBuster v0.2---
+---SubBuster v0.3---
 Created By: @shoamshilo 2020"""
 
 quiet = False
@@ -111,11 +111,12 @@ def extractdomains(resp):
     try:
         list = regex.findall(resp)
         for link in list:
-            #link = re.sub('<span.*>', '', link)
             if link.startswith('http'):
                 link = 'https://' + urlparse.urlparse(link).netloc
                 if link.endswith(domain) and not inDomains(link):
                     Domains.append(link)
+                    if verbose:
+                        print(mark + link)
     except:
         pass
 
@@ -183,6 +184,7 @@ def printDomains():
         print(mark + url)
     for email in Emails:
         print(mark + email)
+
 def OutPut():
     with open(outFile , 'w') as out:
         for url in Domains:
