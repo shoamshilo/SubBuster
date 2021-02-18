@@ -53,7 +53,7 @@ Usage:
 -o - Specify an output file.
 -f - Specify a list of domains.
 -p - Specify a port 80 or 443.
--v - Verbos output. 
+-v - Verbose output. 
 -I - Toggle hostname IP resolve.
 help - Help menu.
 ```
