@@ -1,24 +1,8 @@
-#!/usr/bin/python3
-import sys , requests , socket , re 
+#!/usr/bin/env python
+
+import sys , requests , socket , re , argparse 
 import urllib.parse as urlparse
 from os import path
-
-Banner = """Usage: 
--d - Specify the base domain.
--w - Path to the wordlist. If the flag is not 
-     set SubBuster will use its wordlist.
--o - Specify an output file.
--f - Specify a list of domains.
--p - Specify a port 80 or 443.
--q - Toggle quiet mode.
--v - Verbose output. 
--I - Toggle hostname IP resolve.
--E - Toggle email searching with hunter.io.
-     Requires an API key.
-help - Help menu.
-
----SubBuster v0.3---
-Created By: @shoamshilo 2020"""
 
 quiet = False
 verbose = False
@@ -43,34 +27,32 @@ def StartUp():
     global wordlist
     global ListFile
     global ports
-    i = 0 
+    
+    parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter,epilog='Example: python ' + sys.argv[0] + " -d google.com -o out.txt" + '\n\n---SubBuster v0.4---\nCreated By: @shoamshilo 2020 ',
+    description='''SubBuster is a sub-domain discovery tool that uses a custom made wordlist to detect sub-domains.\nThis tool can assist penetration tester or OSINT investigators in determining a corporation sub-domains.\nit allowsfor both active and passive scanning of a domain.''')
+    parser._optionals.title = "OPTIONS"
+    parser.add_argument('-d' , action='store', dest='domain' , help='Specify the base domain.')
+    parser.add_argument('-w' , action='store', dest='wordlist' , help="Path to the wordlist. If the flag is not set SubBuster will use its wordlist.")
+    parser.add_argument('-q', action='store_true', default=False, dest='quiet' , help='Toggle quiet mode.')
+    parser.add_argument('-o' , action='store', dest='outFile', help='Specify an output file.')
+    parser.add_argument('-f' , action='store', dest='ListFile' ,help='Specify a list of domains.')
+    parser.add_argument('-p' , action='store', dest='ports' , help='Specify a port 80 or 443.')
+    parser.add_argument('-v' , action='store_true', default=False, dest='verbose' , help=' Verbose output.')
+    parser.add_argument('-E' , action='store', dest='api_key' , help='Toggle email searching with hunter.io. Requires an API key.')
+    parser.add_argument('-I' , action='store_true', default=False, dest='ip' , help='Toggle hostname IP resolve')
+    parser.add_argument('--version' ,  action='version',dest='v0.4')
 
-    if len(sys.argv) == 1:
-        print(mark + "For help type - SubBuster.py help")
-        sys.exit()
-    for argv in sys.argv:
-        if argv == "-d":
-            domain = sys.argv[i + 1]
-        if argv == "-w":
-            wordlist = sys.argv[i + 1]
-        if argv == "-o":
-            outFile = sys.argv[i + 1]
-        if argv == "-f":
-            ListFile = sys.argv[i + 1]
-        if argv == '-p':
-            ports = sys.argv[i + 1]
-        if argv == '-E':
-            api_key = sys.argv[i + 1]
-        if argv == '-I':
-            ip = True
-        if argv == '-q':
-            quiet = True 
-        if argv == '-v':
-            verbose = True
-        if argv == "help":
-            print(Banner)
-            sys.exit()
-        i+=1
+    args =  parser.parse_args()
+
+    quiet = args.quiet
+    verbose = args.verbose
+    ip = args.ip
+    api_key = args.api_key
+    ListFile = args.ListFile
+    outFile = args.outFile 
+    ports = args.ports
+    domain = args.domain
+    wordlist = args.wordlist
 
 def BrutForce():
     global Domains

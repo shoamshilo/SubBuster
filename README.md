@@ -42,19 +42,22 @@ Usage:
 
 ## Features
 ```
-Usage: 
--d - Specify the base domain.
--w - Path to the wordlist. If the flag is not 
-     set SubBuster will use its wordlist.
--o - Specify an output file.
--f - Specify a list of domains.
--p - Specify a port 80 or 443.
--q - Toggle quiet mode.
--v - Verbose output. 
--I - Toggle hostname IP resolve.
--E - Toggle email searching with hunter.io.
-     Requires an API key.
-help - Help menu.
+usage: SubBuster.py [-h] [-d DOMAIN] [-w WORDLIST] [-q] [-o OUTFILE] [-f LISTFILE] [-p PORTS] [-v] [-E API_KEY] [-I] [--version]
+
+OPTIONS:
+  -h, --help   show this help message and exit
+  -d DOMAIN    Specify the base domain.
+  -w WORDLIST  Path to the wordlist. If the flag is not set SubBuster will use its wordlist.
+  -q           Toggle quiet mode.
+  -o OUTFILE   Specify an output file.
+  -f LISTFILE  Specify a list of domains.
+  -p PORTS     Specify a port 80 or 443.
+  -v           Verbose output.
+  -E API_KEY   Toggle email searching with hunter.io. Requires an API key.
+  -I           Toggle hostname IP resolve
+  --version    show program's version number and exit
+
+Example: python SubBuster.py -d google.com -o out.txt
 
 ---SubBuster v0.3---
 Created By: @shoamshilo 2020
